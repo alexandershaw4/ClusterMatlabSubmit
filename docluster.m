@@ -1,11 +1,4 @@
 function docluster(f,varargin)
-% f is a scriptname or function
-% varargin is any function inputs
-%
-% docluster('FunctionName','input1')
-% docluster('ScriptName')
-%
-% AS2016
 
 h = evalinContext('pwd');
 
