@@ -17,6 +17,7 @@ st = sprintf('%d jobs running',nj);
 fprintf(st);
 
 while nj > 1
+    [s,jobs] = unix(cmd);
     pause(10);
     nj = l(e(r));
     Tj = l(e(T));
