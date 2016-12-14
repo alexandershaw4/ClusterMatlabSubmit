@@ -30,7 +30,7 @@ if any(varargin{1});
     ln{4} = [ln{4} ''');exit;"'];
 
 else
-    ln{4} = [';exit'''];
+    ln{4} = [';exit"'];
 end
 
 cmd = strcat(ln{1},ln{2},ln{3}, ln{4});
