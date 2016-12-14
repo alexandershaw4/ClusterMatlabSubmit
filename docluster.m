@@ -17,13 +17,13 @@ ln{3} = [ln{3} f];
 
 try varargin{1}; catch varargin{1} = []; end
 
-if any(varargin{:});
+if any(varargin{1});
     ln{4} = ['(''$' varargin{1}];
     %ln{4} = ['('''  evalin('base',varargin{1}) ];
     
     if length(varargin) > 1
         for j = 2:length(varargin)
-            ln{4} = [ln{4} ',''$' varargin{j} ''''];
+            ln{4} = [ln{4} ''',''$' varargin{j} ''];
         end
     end
     
@@ -39,10 +39,14 @@ dlmwrite(['job_' date '.sh'],cmd,'delimiter','');
 unix(['chmod a+x job_' date '.sh']) ;
 
 
-if any(varargin{:})
+if any(varargin{1})
     inp = [];
     for k = 1:length(varargin)
-        inp = [inp ' ' varargin{k} '=' evalinContext(varargin{k}) ];
+        if k == 1; inp = [inp ' ']; end
+        inp = [inp varargin{k} '=' evalinContext(varargin{k}) ];
+        if k ~= length(varargin)
+            inp = [inp ',' ];
+        end
     end
     exstr{1} = 'qsub -v ';
     exstr{1} = strcat(exstr{1},inp);
