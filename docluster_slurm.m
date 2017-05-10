@@ -18,12 +18,12 @@ ln{3} = [ln{3} f];
 try varargin{1}; catch varargin{1} = []; end
 
 if any(varargin{1});
-    ln{4} = ['(''$' varargin{1}];
+    ln{4} = ['(''' varargin{1}];
     %ln{4} = ['('''  evalin('base',varargin{1}) ];
     
     if length(varargin) > 1
         for j = 2:length(varargin)
-            ln{4} = [ln{4} ''',''$' varargin{j} ''];
+            ln{4} = [ln{4} ''',''' varargin{j} ''];
         end
     end
     
@@ -59,5 +59,6 @@ end
 %c = fix(clock);
 %c = [ num2str(c(4)) '_' num2str(c(5)) ];
 
-torun = [exstr{:} ' job_' date '.sh ' inp];
+%torun = [exstr{:} ' job_' date '.sh ' inp];
+torun = [exstr{:} ' job_' date '.sh'];
 unix(torun)
