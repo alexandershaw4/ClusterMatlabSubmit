@@ -1,10 +1,15 @@
 function docluster_slurm(f,varargin)
+% use sbatch to submit cluster jobs from within matlab
+% by auto-writing a little bash script and sbatching it
+%
+% f is the matlab function or script to call on the cluster
+% other inputs are the *string* inputs to that function
+%
+% AS
 
-h = evalinContext('pwd');
-
- fh  = which(f);
- fh  = [fileparts(fh) '/'];
-% fh  = [' addpath(' fh ');'];
+h   = evalinContext('pwd');
+fh  = which(f);
+fh  = [fileparts(fh) '/'];
 
 ln{1} = sprintf('#!/bin/bash\n');
 ln{2} = sprintf('\n');
@@ -12,14 +17,12 @@ ln{2} = sprintf([ln{2} 'cd ' h '\n']);
 ln{3} = sprintf('\nmatlab -nodesktop -nosplash -r "');
 ln{3} = [ln{3} ' addpath ' fh '; '];
 ln{3} = [ln{3} f];
-%ln{3} = [ln{3} fh f];
 
 
 try varargin{1}; catch varargin{1} = []; end
 
 if any(varargin{1});
     ln{4} = ['(''' varargin{1}];
-    %ln{4} = ['('''  evalin('base',varargin{1}) ];
     
     if length(varargin) > 1
         for j = 2:length(varargin)
@@ -51,14 +54,9 @@ if any(varargin{1})
         end
     end
     exstr{1} = 'sbatch ';
-    %exstr{1} = strcat(exstr{1});
 else
     exstr{1} = 'sbatch ';
 end
 
-%c = fix(clock);
-%c = [ num2str(c(4)) '_' num2str(c(5)) ];
-
-%torun = [exstr{:} ' job_' date '.sh ' inp];
 torun = [exstr{:} ' job_' date '.sh'];
 unix(torun)
