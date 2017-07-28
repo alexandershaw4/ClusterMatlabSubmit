@@ -52,4 +52,8 @@ z = x*y;
 save(f,'z');
 ```
 
+```
+docluster_slurm('myprod',x,y,f);
+```
+
 
