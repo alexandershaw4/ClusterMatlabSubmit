@@ -8,7 +8,7 @@ f = 'myfunction'            % function I want to run
 feval(f,varargin)           % evaluate function locally
 docluster_slurm(f,varargin) % same usage to send to cluster
 ```
-It works by auto writing out a small bash script like this:
+It works by auto writing out a small bash script like this (which it then sbatchs / qsubs):
 
 ```
 #!/bin/bash
