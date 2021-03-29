@@ -13,7 +13,7 @@ fh  = which(f);
 fh  = [fileparts(fh) '/'];
 
 ln{1} = sprintf('#!/bin/bash\n');
-ln{1} = [ln{1} '#SBATCH --job-name=aOPTIM'];
+ln{1} = [ln{1} '#SBATCH --job-name=WANDVIS'];
 ln{1} = [ln{1} sprintf('\n')];
 ln{1} = [ln{1} '#SBATCH --ntasks 1'];
 ln{1} = [ln{1} sprintf('\n')];
